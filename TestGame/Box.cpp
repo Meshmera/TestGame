@@ -1,11 +1,12 @@
 #include "Box.h"
+#include <iostream>
 
 Box::Box(int offsetX, int offsetY, int size, SDL_Renderer* renderer)
     : offsetX(offsetX), offsetY(offsetY), size(size), x(0), y(0) {
 
-    SDL_Surface* surface = IMG_Load("image_resource\\shield.png");  // Загружаем картинку
+    SDL_Surface* surface = IMG_Load("image_resource\\shield.png"); 
     if (!surface) {
-        //printf("Ошибка загрузки изображения: %s\n", IMG_GetError());
+        std::cout << "Ошибка загрузки изображения: " << IMG_GetError() << std::endl;
     }
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
@@ -21,15 +22,10 @@ void Box::update(int playerX, int playerY) {
 }
 
 void Box::render(SDL_Renderer* renderer) {
-    /*SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-    SDL_Rect boxRect = { x, y, size, 10 };
-    SDL_RenderFillRect(renderer, &boxRect);*/
-
     SDL_Rect rect = { x, y, size, 10 };
     SDL_RenderCopy(renderer, texture, NULL, &rect);
 }
 
-// Проверка столкновения с противником
 bool Box::checkCollision(Enemy* enemy) {
     int ex = enemy->getX();
     int ey = enemy->getY();

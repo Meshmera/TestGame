@@ -20,7 +20,7 @@ public:
 private:
     int x, y;
     int size;
-    int offsetX, offsetY;  // Смещение относительно игрока
+    int offsetX, offsetY;  
     SDL_Texture* texture;
 };
 

@@ -20,7 +20,7 @@ private:
     int x, y;  // Координаты игрока
     int size;  // Размер игрока
     int speed; // Скорость движения
-    int velX, velY; // Скорость по осям
+    int velX; // Скорость по осям
 
     SDL_Texture* texture;  // Текстура игрока
 };

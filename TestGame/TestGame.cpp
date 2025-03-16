@@ -37,7 +37,7 @@ void spawnEnemy(std::vector<Enemy*>& enemies, int screenWidth, int screenHeight,
     int x = rand() % screenWidth;  // Случайная X координата
     int y = 0;  // Враги появляются сверху экрана
     int size = 10;
-    int speed = 2 + score / 50;  // Увеличение скорости врагов по мере роста очков
+    double speed = 0.1 + (score / 100.0)*0.1;  // Увеличение скорости врагов по мере роста очков
 
     if (type == 0) {
         enemies.push_back(new StraightEnemy(x, y, size, speed, renderer));
@@ -92,9 +92,9 @@ int main(int argc, char* argv[]) {
     bool running = true;
     SDL_Event event;
 
-    enemies.push_back(new StraightEnemy(100, 100, 10, 1, renderer));
-    enemies.push_back(new ZigzagEnemy(100, 100, 10, 1, renderer));
-    enemies.push_back(new SpiralEnemy(400, 300, 10, 1, renderer));
+    enemies.push_back(new StraightEnemy(100, 100, 10, 0.1, renderer));
+    enemies.push_back(new ZigzagEnemy(100, 100, 10, 0.1, renderer));
+    enemies.push_back(new SpiralEnemy(400, 300, 10, 0.1, renderer));
 
     srand(time(0));  // Инициализируем генератор случайных чисел
 
@@ -116,8 +116,6 @@ int main(int argc, char* argv[]) {
         player.update();  
         box.update(player.getX(), player.getY());
 
-        //SDL_RenderCopy(renderer, backgroundTexture, NULL, NULL);
-
         SDL_Rect bgRect1 = { 0, bgOffset, 800, 600 };
         SDL_Rect bgRect2 = { 0, bgOffset - 600, 800, 600 };  // Второй кусок
 
@@ -130,7 +128,7 @@ int main(int argc, char* argv[]) {
         box.render(renderer);            
 
         for (auto it = enemies.begin(); it != enemies.end();) {
-            (*it)->update(player.getX(), player.getY());
+            (*it)->update();
             (*it)->render(renderer);
 
             if (box.checkCollision(*it)) {  // Если враг попал в коробку — удаляем
@@ -168,7 +166,7 @@ int main(int argc, char* argv[]) {
             spawnEnemy(enemies, 800, 600, score, renderer);
             spawnTimer = spawnInterval;
 
-            if (spawnInterval > 30) {  // Постепенное уменьшение времени спавна
+            if (spawnInterval > 100) {  // Постепенное уменьшение времени спавна
                 spawnInterval -= 1;
             }
         }
