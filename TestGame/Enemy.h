@@ -17,9 +17,7 @@ public:
     double getY() const { return y; }
     double getSize() const { return size; }
 
-    bool isOffScreen(int screenHeight) const {
-        return y > screenHeight || y < -50 || x < 0 || x > 800;
-    }
+    bool isOffScreen(int screenHeight) const;
 
 protected:
     double x, y;
@@ -51,5 +49,5 @@ public:
     void update() override;
 
 private:
-    double angle = 1.0;
+    double angle = 0.0;
 };

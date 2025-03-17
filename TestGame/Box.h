@@ -1,4 +1,5 @@
 #pragma once
+
 #include <SDL.h>
 #include <SDL_image.h>
 
@@ -6,7 +7,7 @@
 
 class Box {
 public:
-    Box(int offsetX, int offsetY, int size, SDL_Renderer* renderer);
+    Box(int offsetX, int offsetY, int width, int height, SDL_Renderer* renderer);
     ~Box();
 
     void update(int playerX, int playerY);
@@ -15,11 +16,10 @@ public:
 
     int getX() const { return x; }
     int getY() const { return y; }
-    int getSize() const { return size; }
 
 private:
     int x, y;
-    int size;
+    int width, height;
     int offsetX, offsetY;  
     SDL_Texture* texture;
 };

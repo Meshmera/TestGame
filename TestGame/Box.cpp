@@ -1,8 +1,8 @@
 #include "Box.h"
 #include <iostream>
 
-Box::Box(int offsetX, int offsetY, int size, SDL_Renderer* renderer)
-    : offsetX(offsetX), offsetY(offsetY), size(size), x(0), y(0) {
+Box::Box(int offsetX, int offsetY, int width, int height, SDL_Renderer* renderer)
+    : offsetX(offsetX), offsetY(offsetY), width(width), height(height), x(0), y(0) {
 
     SDL_Surface* surface = IMG_Load("image_resource\\shield.png"); 
     if (!surface) {
@@ -22,7 +22,7 @@ void Box::update(int playerX, int playerY) {
 }
 
 void Box::render(SDL_Renderer* renderer) {
-    SDL_Rect rect = { x, y, size, 10 };
+    SDL_Rect rect = { x, y, width, height };
     SDL_RenderCopy(renderer, texture, NULL, &rect);
 }
 
@@ -31,6 +31,6 @@ bool Box::checkCollision(Enemy* enemy) {
     int ey = enemy->getY();
     int esize = enemy->getSize();
 
-    return (x < ex + esize && x + size > ex &&
-        y < ey + esize && y + 10/*size*/ > ey);
+    return (x < ex + esize && x + width > ex &&
+        y < ey + esize && y + height > ey);
 }

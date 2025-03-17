@@ -21,6 +21,10 @@ void Enemy::render(SDL_Renderer* renderer) {
     SDL_RenderCopy(renderer, texture, NULL, &rect);
 }
 
+bool Enemy::isOffScreen(int screenHeight) const {
+    return y > screenHeight || y < -50 || x < 0 || x > 800;
+}
+
 StraightEnemy::StraightEnemy(int startX, int startY, int size, double speed, SDL_Renderer* renderer)
     : Enemy(startX, startY, size, speed, renderer) {
 }
@@ -49,7 +53,7 @@ SpiralEnemy::SpiralEnemy(int startX, int startY, int size, double speed, SDL_Ren
 }
 
 void SpiralEnemy::update() {
-    angle += 30.0;
+    angle += 5.0;
     x += cos(angle) * 30.0;
     y += sin(angle) * 30.0 + speed;
 }

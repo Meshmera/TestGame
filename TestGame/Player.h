@@ -17,11 +17,11 @@ public:
     int getSize() const { return size; }
 
 private:
-    int x, y;  // Координаты игрока
-    int size;  // Размер игрока
-    int speed; // Скорость движения
-    int velX; // Скорость по осям
+    int x, y;  
+    int size;  
+    int speed; 
+    int velX; 
 
-    SDL_Texture* texture;  // Текстура игрока
+    SDL_Texture* texture;  
 };
 

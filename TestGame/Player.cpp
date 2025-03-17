@@ -26,7 +26,7 @@ void Player::handleEvent(SDL_Event& event) {
     else if (event.type == SDL_KEYUP && event.key.repeat == 0) {
         switch (event.key.keysym.sym) {
         case SDLK_LEFT:
-        case SDLK_RIGHT: velX = 0; break;
+        case SDLK_RIGHT: velX = 0.0; break;
         }
     }
 }
